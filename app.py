@@ -1,11 +1,10 @@
 import os
-destinos = [{"nome": "Pedro Pedro", "Destino": "Morumbi", "ativo": True},
-           {"nome": "Isabel Roberta", "Destino": "Jardir São Paulo", "ativo": False},
-           {"nome": "Vinicius Rosa", "Destino": "jardir Europa", "ativo": True},
-           {"nome": "Gustavo Erique", "Destino": "Centro", "ativo": True}]
+viagens = [{"nome": "gabriel", "destino": "Morumbi 1", "ativo": True},
+           {"nome": "Vini", "destino": " Jardir são paulo", "ativo": True},
+           {"nome": "samuel", "destino": "Portal", "ativo": True}]
     
 def exibir_titulo():
-    print("""táxi\n""")
+    print("""taxi\n""")
 
 
 def exibir_opcao():
@@ -17,7 +16,9 @@ def exibir_opcao():
 def escolher_opcao():
 
     def exibir_subtitulo(texto):
-        os.system('clear')
+        os.system('cls')
+        linha = "-" *len(texto)
+        print(linha)
         print(texto)
         print(" ")
 
@@ -28,36 +29,39 @@ def escolher_opcao():
 
     def cadrastro_viagem():
         exibir_subtitulo("Cadastro de viagens")
-        destino_viagem = input("Digite o destino da sua viagem: ")
-        dados_da_viagem = {"nome": nome_pessoa, "destino": destino_viagem,"ativo": True }
-        destinos.append(destino_viagem)
-        print(f" A viagem {destino_viagem} foi cadrastada com exito")
+        nome_pessoa = input("Digite seu nome: ")
+        destino_pessoa = input(f"Insira seu destino: ")
+        dados_da_pessoa = {"nome":nome_pessoa, "destino":destino_pessoa, "ativo":True}
+        viagens.append(dados_da_pessoa)
+        print(f" A viagem {nome_pessoa} foi cadrastada com exito")
         retorna_menu()
 
     def lista_viagens():
         exibir_subtitulo("Lista de Viagens")
-        for destino in destinos:
-            nome_pessoa = destino["nome"]
-            destino_pessoa = destino["Destino"]
-            ativo = destino["ativo"]
-            print(f" - {nome_pessoa} | {destino_pessoa} | {ativo} ")
+        for viagem in viagens:
+            nome_pessoa = viagem["nome"]
+            destino_pessoa = viagem["destino"]
+            ativo = "ativo" if viagem["ativo"] else "desativado"
+            print(f" - {nome_pessoa.ljust(20)} | {destino_pessoa} | {ativo} ")
         retorna_menu()
 
     def ativar_cadrastro():
         exibir_subtitulo("Ativar cadastro de viagem")
-        nome_pessoa = input("digite o endereço:")
+        nome_pessoa = input("Digite o nome para ativar a viagem: ")
         nome_encontro = False
-        for destino in destinos:
-            if nome_pessoa == destino["nome"]
-            nome_encontro = True
-            destino["ativa"] = not destino
-            mensagem = f"{nome_pessoa} teve sua viagem ativada"
-
+        for viagem in viagens:
+            if nome_pessoa == viagem["nome"]:
+                nome_encontro = True
+                viagem["ativo"] = not viagem["ativo"]
+                mensagem = f"{nome_pessoa} teve sua viagem ativada" if viagem["ativo"] else f"O cadrastro de {nome_pessoa} teve a viagem desativada"
+                print(mensagem)
+        if not nome_encontro:
+            print("Nao encontrado, favor digite para voltar")
         retorna_menu()
         
 
     def finalizar_app():
-        os.system('clear')
+        os.system('cls')
         print("Finalizando programa")
 
     def opcao_invalida():
@@ -81,7 +85,7 @@ def escolher_opcao():
         opcao_invalida()
 
 def main():
-    os.system('clear')
+    os.system('cls')
     exibir_titulo()
     exibir_opcao()
     escolher_opcao()
